@@ -49,15 +49,58 @@
     <div class="cart">Cart({{ cart }})</div>
     <!-- Listening for Events v-on directive이용 -->
     <!-- v-on:click 단축 @ -->
-    <button class="button" v-on:click=" cart += 1">Add to Cart</button>
-    <button class="button" v-on:click="addToCart">Add to Cart</button>
-    <button class="button" @click="addToCart">Add to Cart</button>
-    <button class="button" @click="removeFromCart">Remove from Cart</button>
+    <button
+            class="button"
+            :class="{ disabledButton: !inStock }"
+            :disabled="!inStock"
+            v-on:click=" cart += 1 ">
+      Add to Cart
+    </button>
+    <button
+            class="button"
+            :class="{ disabledButton : !inStock }"
+            :disabled="!inStock"
+            v-on:click="addToCart">
+      Add to Cart
+    </button>
+    <button
+            class="button"
+            :class="{ disabledButton : !inStock }"
+            :disabled="!inStock"
+            @click="addToCart">
+      Add to Cart
+    </button>
+    <button
+            class="button"
+            @click="removeFromCart">
+      Remove from Cart
+    </button>
 
     <!-- v-on:mouseover -->
     <div v-for="v in vimgs" :key="v.id" @mouseover="updateImage(v.image)">
       {{v.color}}
     </div>
+
+    <!-- using Camel case -->
+    <div v-for="vimg in vimgs"
+         :key="vimg.id"
+         @mouseover="updateImage(vimg.image)"
+         class="color-circle"
+         :class="{ active: activeClass}"
+         :style="{ backgroundColor: vimg.color }">
+    </div>
+    <!-- using Kebab case -->
+    <div v-for="vimg in vimgs"
+         :key="vimg.id"
+         @mouseover="updateImage(vimg.image)"
+         class="color-circle"
+         :style="{ 'background-color': vimg.color }">
+    </div>
+    <!-- Style Binding: Object -->
+    <div :style="stylesObj">
+    </div>
+    <!-- Class Binding -->
+
 
     <!-- Import Js -->
     <script src="./main.js"></script>

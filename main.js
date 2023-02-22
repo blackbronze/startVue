@@ -5,7 +5,7 @@ const app = Vue.createApp({
             product: 'Socks',
             image: './assets/images/socks_blue.jpg',
             url: 'http://www.naver.com',
-            inStock: true,
+            inStock: false,
 
             inventory: 8,
             details: ['50% cotten', '30% wool', '20% polyester'],
@@ -17,7 +17,12 @@ const app = Vue.createApp({
             vimgs: [
                 { id: 2234, color: 'green', image: './assets/images/socks_green.jpg' },
                 { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg' }
-            ]
+            ],
+            stylesObj: {
+                color: 'red',
+                'font-size': '14px'
+            },
+            activeClass: true
         }
     },
     methods: {
