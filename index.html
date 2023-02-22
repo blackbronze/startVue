@@ -8,22 +8,62 @@
     <!-- Import Vue.js -->
     <script src="https://unpkg.com/vue@3.0.0-beta.12/dist/vue.global.js"></script>
   </head>
-  <body id="app">
+  <body id="contents">
     <div>
+      <!-- 값 출력
+        attribute에 값 출력을 위해서는 v-bind를 사용한다.
+       -->
       <h1>{{product}}</h1>
     </div>
     <div class="product-image">
+      <!-- Attribute Binding v-bind: -->
       <a :href="url"><img :src="image" style="width:100px;height:100px"></a>
     </div>
 
+    <!-- 조건문 -->
     <p v-if="inStock">In Stock</p>
     <p v-else>Out of Stock</p>
+    <!-- Hide/Show display:none을 추가한다. -->
+    <p v-show="inStock"> 판매 중 </p>
+
+    <p v-if="inventory > 10">In Stock</p>
+    <p v-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
+    <p v-else>Out of Stock</p>
+
+    <!-- List Rendering -->
+    <ul>
+      <li v-for="detail in details">{{ detail }}</li>
+    </ul>
+
+    <!-- List Rendering with Object -->
+    <!-- :key는 v-bind:key의 단축이며, key는 DOM요소에 유일한 키를 부여하여, Vue가 요소를 파악할 수 있고,
+    앱 내에서 항목이 업데이트 될 때 추적을 잃지 않는다. -->
+    <!-- 이것은 약간의 성능 향상을 제공하고 나중에 요소에 애니메이션을 적용하는 것과 같은 작업을 수행하는 경우
+     핵심 속성이 요소가 DOM 주위를 이동할 때 Vue가 효과적으로 요소를 관리하는 데 실제로 도움이 된다는 것을
+      알게 될 것입니다.
+    -->
+
+    <div v-for="variant in variants" :key="variant.id" >{{variant.color}}</div>
+    <div>{{variants.length}}</div>
+
+    <div class="cart">Cart({{ cart }})</div>
+    <!-- Listening for Events v-on directive이용 -->
+    <!-- v-on:click 단축 @ -->
+    <button class="button" v-on:click=" cart += 1">Add to Cart</button>
+    <button class="button" v-on:click="addToCart">Add to Cart</button>
+    <button class="button" @click="addToCart">Add to Cart</button>
+    <button class="button" @click="removeFromCart">Remove from Cart</button>
+
+    <!-- v-on:mouseover -->
+    <div v-for="v in vimgs" :key="v.id" @mouseover="updateImage(v.image)">
+      {{v.color}}
+    </div>
 
     <!-- Import Js -->
     <script src="./main.js"></script>
     <!-- Mount App -->
     <script>
-      const mountedApp = app.mount('#app');
+      const mountedApp = app.mount('#contents');
     </script>
   </body>
 </html>
