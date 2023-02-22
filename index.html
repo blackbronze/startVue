@@ -8,12 +8,22 @@
     <!-- Import Vue.js -->
     <script src="https://unpkg.com/vue@3.0.0-beta.12/dist/vue.global.js"></script>
   </head>
-  <body>
-    <div id="app">
-      <h1>Product goes here</h1>
+  <body id="app">
+    <div>
+      <h1>{{product}}</h1>
     </div>
+    <div class="product-image">
+      <a :href="url"><img :src="image" style="width:100px;height:100px"></a>
+    </div>
+
+    <p v-if="inStock">In Stock</p>
+    <p v-else>Out of Stock</p>
 
     <!-- Import Js -->
     <script src="./main.js"></script>
+    <!-- Mount App -->
+    <script>
+      const mountedApp = app.mount('#app');
+    </script>
   </body>
 </html>
