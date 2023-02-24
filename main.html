@@ -48,7 +48,7 @@
 
     <div class="cart">Cart({{ cart }})</div>
     <!-- Listening for Events v-on directive이용 -->
-    <!-- v-on:click 단축 @ -->
+    <!-- v-on:click 이용 javascript 명령실행 -->
     <button
             class="button"
             :class="{ disabledButton: !inStock }"
@@ -56,6 +56,7 @@
             v-on:click=" cart += 1 ">
       Add to Cart
     </button>
+    <!-- v-on:click 이용 javascript 함수호출 -->
     <button
             class="button"
             :class="{ disabledButton : !inStock }"
@@ -63,6 +64,7 @@
             v-on:click="addToCart">
       Add to Cart
     </button>
+    <!-- v-on:click 단축 @click 이용 -->
     <button
             class="button"
             :class="{ disabledButton : !inStock }"
@@ -76,31 +78,61 @@
       Remove from Cart
     </button>
 
-    <!-- v-on:mouseover -->
-    <div v-for="v in vimgs" :key="v.id" @mouseover="updateImage(v.image)">
+    <!-- v-on:mouseover 단축 @mouseover 이용 -->
+    <div v-for="v in imgs" :key="v.id" @mouseover="updateImage(v.image)">
       {{v.color}}
     </div>
 
     <!-- using Camel case -->
-    <div v-for="vimg in vimgs"
-         :key="vimg.id"
-         @mouseover="updateImage(vimg.image)"
+    <div v-for="img in imgs"
+         :key="img.id"
+         @mouseover="updateImage(img.image)"
          class="color-circle"
          :class="{ active: activeClass}"
-         :style="{ backgroundColor: vimg.color }">
+         :style="{ backgroundColor: img.color, display: 'inline-block' }">
     </div>
     <!-- using Kebab case -->
-    <div v-for="vimg in vimgs"
-         :key="vimg.id"
-         @mouseover="updateImage(vimg.image)"
+    <div v-for="img in imgs"
+         :key="img.id"
+         @mouseover="updateImage(img.image)"
          class="color-circle"
-         :style="{ 'background-color': vimg.color }">
+         :style="{ 'background-color': img.color, display: 'inline-block' }">
     </div>
     <!-- Style Binding: Object -->
     <div :style="stylesObj">
     </div>
-    <!-- Class Binding -->
 
+    <!-- Multiple Class Names -->
+    <div class="color-circle"
+         :class="{active: activeClass}">
+    </div>
+    <!-- Ternary Operators -->
+    <div :class="[isActive ? activeClassNm: '']">
+    </div>
+
+    <!-- Properties -->
+    <h1>{{ brand + ' ' + product }}</h1>
+
+    <!-- Computed Properties -->
+    <!--
+      Like I mentioned earlier, computed properties provide us a performance improvement.
+      This is because they cache the calculated value.
+      The value ('Vue Mastery Socks') gets stored away and only updates when it needs to
+      , when one of its dependencies change.
+      For example, if the brand were to change from 'Vue Mastery' to 'Node Mastery'
+      , our computed property would receive that new brand dependency
+      , then recalculate and return the new value: 'Node Mastery Socks'
+    -->
+    <h1>{{title}}</h1>
+
+    <!-- Computing Image & Quantity -->
+    <div
+      v-for="(img, index) in imgs"
+      :key="img.id"
+      @mouseover="updateImg(index)"
+      class="color-circle"
+      :style="{ backgroundColor: img.color }">
+    </div>
 
     <!-- Import Js -->
     <script src="./main.js"></script>

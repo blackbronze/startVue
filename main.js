@@ -5,7 +5,7 @@ const app = Vue.createApp({
             product: 'Socks',
             image: './assets/images/socks_blue.jpg',
             url: 'http://www.naver.com',
-            inStock: false,
+            inStock: true,
 
             inventory: 8,
             details: ['50% cotten', '30% wool', '20% polyester'],
@@ -14,15 +14,23 @@ const app = Vue.createApp({
                 { id: 2235, color: 'blue'}
             ],
             cart: 0,
-            vimgs: [
-                { id: 2234, color: 'green', image: './assets/images/socks_green.jpg' },
-                { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg' }
+            imgs: [
+                { id: 2234, color: 'green', image: './assets/images/socks_green.jpg', quantity: 50 },
+                { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0 }
             ],
             stylesObj: {
                 color: 'red',
                 'font-size': '14px'
             },
-            activeClass: true
+            activeClass: true,
+
+            isActive: true,
+            activeClassNm: 'color-circle',
+
+            product: 'Socks',
+            brand: 'Vue Mastery',
+
+            selectedImg: 0
         }
     },
     methods: {
@@ -36,6 +44,17 @@ const app = Vue.createApp({
         },
         updateImage(vimg) {
             this.image = vimg;
+        },
+        updateImg(index) {
+            this.selectedImg = index;
+        }
+    },
+    computed: {
+        title() {
+            return this.brand + ' ' + this.product;
+        },
+        image() {
+            return this.imgs[this.selectedImg].image;
         }
     }
 })
